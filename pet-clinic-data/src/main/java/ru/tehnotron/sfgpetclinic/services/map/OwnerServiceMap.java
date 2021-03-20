@@ -7,7 +7,7 @@ import ru.tehnotron.sfgpetclinic.services.OwnerService;
 
 @Service
 @Profile({"map", "default"})
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+public class OwnerServiceMap extends AbstractMapService<Owner> implements OwnerService {
     @Override
     public Owner findByLastName(String lastName) {
         return map.values().stream().filter(x -> x.getLastName()

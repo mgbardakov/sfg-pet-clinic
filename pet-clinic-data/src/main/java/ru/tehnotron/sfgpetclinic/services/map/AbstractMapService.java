@@ -3,14 +3,11 @@ package ru.tehnotron.sfgpetclinic.services.map;
 import ru.tehnotron.sfgpetclinic.model.BaseEntity;
 import ru.tehnotron.sfgpetclinic.services.CrudService;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public abstract class AbstractMapService<T extends BaseEntity<ID>, ID> implements CrudService<T, ID> {
+public abstract class AbstractMapService<T extends BaseEntity<Long>> implements CrudService<T, Long> {
 
-    protected Map<ID, T> map = new HashMap<>();
+    protected Map<Long, T> map = new HashMap<>();
 
     @Override
     public Set<T> findAll() {
@@ -18,13 +15,21 @@ public abstract class AbstractMapService<T extends BaseEntity<ID>, ID> implement
     }
 
     @Override
-    public T findBy(ID id) {
+    public T findBy(Long id) {
         return map.get(id);
     }
 
     @Override
     public T save(T object) {
-        return map.put(object.getId(), object);
+        if (object != null) {
+            if(object.getId() == null) {
+                object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
+        } else {
+            throw new RuntimeException("Object can not be null");
+        }
+        return object;
     }
 
     @Override
@@ -33,7 +38,16 @@ public abstract class AbstractMapService<T extends BaseEntity<ID>, ID> implement
     }
 
     @Override
-    public void deleteById(ID id) {
+    public void deleteById(Long id) {
         map.remove(id);
+    }
+
+    private Long getNextId() {
+        var rsl = 1L;
+        var keys = map.keySet();
+        if (!keys.isEmpty()) {
+            rsl = Collections.max(map.keySet()) + 1;
+        }
+        return rsl;
     }
 }

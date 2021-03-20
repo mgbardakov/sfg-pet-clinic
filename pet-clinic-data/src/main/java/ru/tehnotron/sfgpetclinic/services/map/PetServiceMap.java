@@ -7,6 +7,6 @@ import ru.tehnotron.sfgpetclinic.services.PetService;
 
 @Service
 @Profile({"map", "default"})
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
+public class PetServiceMap extends AbstractMapService<Pet> implements PetService {
 
 }
