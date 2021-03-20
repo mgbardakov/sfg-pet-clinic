@@ -7,7 +7,7 @@ import ru.tehnotron.sfgpetclinic.model.Vet;
 import ru.tehnotron.sfgpetclinic.services.OwnerService;
 import ru.tehnotron.sfgpetclinic.services.VetService;
 
-//@Component
+@Component
 public class DataLoader implements CommandLineRunner {
 
     private final OwnerService ownerService;
@@ -27,9 +27,9 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
-        owner1.setId(2L);
-        owner1.setFirstName("Gordon");
-        owner1.setLastName("Freeman");
+        owner2.setId(2L);
+        owner2.setFirstName("Gordon");
+        owner2.setLastName("Freeman");
         ownerService.save(owner2);
 
         System.out.println("Loaded owners....");
