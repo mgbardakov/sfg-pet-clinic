@@ -1,6 +1,6 @@
 package ru.tehnotron.sfgpetclinic.model;
 
-public class PetType extends BaseEntity {
+public class PetType extends BaseEntity<Long> {
 
     private String name;
 
