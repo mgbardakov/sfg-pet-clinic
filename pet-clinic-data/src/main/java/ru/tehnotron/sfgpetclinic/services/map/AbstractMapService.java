@@ -21,14 +21,13 @@ public abstract class AbstractMapService<T extends BaseEntity<Long>> implements 
 
     @Override
     public T save(T object) {
-        if (object != null) {
-            if(object.getId() == null) {
-                object.setId(getNextId());
-            }
-            map.put(object.getId(), object);
-        } else {
+        if (object == null) {
             throw new RuntimeException("Object can not be null");
         }
+        if(object.getId() == null) {
+            object.setId(getNextId());
+            }
+            map.put(object.getId(), object);
         return object;
     }
 
