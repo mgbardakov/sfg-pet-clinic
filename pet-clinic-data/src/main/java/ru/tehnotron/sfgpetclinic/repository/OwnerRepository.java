@@ -1,7 +1,10 @@
 package ru.tehnotron.sfgpetclinic.repository;
 
-import org.springframework.data.repository.CrudRepository;
 import ru.tehnotron.sfgpetclinic.model.Owner;
 
-public interface OwnerRepository extends CrudRepository<Owner, Long> {
+import java.util.Optional;
+
+public interface OwnerRepository extends BaseEntityRepository<Owner> {
+
+    Optional<Owner> findByLastName(String lastName);
 }
